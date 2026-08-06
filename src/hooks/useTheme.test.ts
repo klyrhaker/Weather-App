@@ -16,23 +16,25 @@ function mockMatchMedia(matches: boolean) {
 describe("useTheme", () => {
   beforeEach(() => {
     localStorage.clear();
+    vi.restoreAllMocks();
   });
   test("uses system theme when no value in localStorage", () => {
     mockMatchMedia(true);
     const { result } = renderHook(() => useTheme());
-    const carrentTheme = JSON.parse(localStorage.getItem("theme")!);
+    const currentTheme = JSON.parse(localStorage.getItem("theme")!);
     expect(result.current[0]).toBe("dark");
-    expect(carrentTheme).toBe("dark");
+    expect(currentTheme).toBe("dark");
   });
-  test("uses value in localStorage if it haves", () => {
+  test("uses value from localStorage when it exists", () => {
     localStorage.setItem("theme", JSON.stringify("dark"));
     mockMatchMedia(false);
     const { result } = renderHook(() => useTheme());
-    const carrentTheme = JSON.parse(localStorage.getItem("theme")!);
+    const currentTheme = JSON.parse(localStorage.getItem("theme")!);
     expect(result.current[0]).toBe("dark");
-    expect(carrentTheme).toBe("dark");
+    expect(currentTheme).toBe("dark");
   });
   test("toggles theme", () => {
+    mockMatchMedia(false);
     localStorage.setItem("theme", JSON.stringify("light"));
     const { result } = renderHook(() => useTheme());
     expect(result.current[0]).toBe("light");

@@ -1,8 +1,9 @@
 import useLocalStorage from "./useLocalStorage";
+export type Theme = "light" | "dark";
 
-function useTheme(): [string, () => void] {
+function useTheme(): [Theme, () => void] {
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const [theme, setTheme] = useLocalStorage(
+  const [theme, setTheme] = useLocalStorage<Theme>(
     "theme",
     mediaQuery.matches ? "dark" : "light",
   );

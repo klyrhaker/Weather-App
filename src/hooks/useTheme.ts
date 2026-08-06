@@ -1,4 +1,4 @@
-import useLocalStorage from "../../components/Navbar/useLocalStorage";
+import useLocalStorage from "./useLocalStorage";
 
 function useTheme(): [string, () => void] {
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");

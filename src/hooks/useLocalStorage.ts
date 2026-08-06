@@ -1,5 +1,13 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
 
+function safeSetItem(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 function useLocalStorage<T>(
   key: string,
   initial: T,
@@ -12,29 +20,25 @@ function useLocalStorage<T>(
       }
     } catch (err) {
       console.error(err);
-      localStorage.setItem(key, JSON.stringify(initial));
-      return initial;
     }
-    localStorage.setItem(key, JSON.stringify(initial));
+    safeSetItem(key, JSON.stringify(initial));
     return initial;
   });
 
   function setStoredValue(newValue: T | ((prev: T) => T)): void {
-    try {
-      if (typeof newValue === "function") {
-        setValue((prev) => {
-          const result = (newValue as (prev: T) => T)(prev);
-          localStorage.setItem(key, JSON.stringify(result));
-          return result;
-        });
-      } else {
-        localStorage.setItem(key, JSON.stringify(newValue));
-        setValue(newValue);
-      }
-    } catch (err) {
-      console.error(err);
+    if (typeof newValue === "function") {
+      setValue((prev) => {
+        const result = (newValue as (prev: T) => T)(prev);
+        safeSetItem(key, JSON.stringify(result));
+        return result;
+      });
+    } else {
+      safeSetItem(key, JSON.stringify(newValue));
+      setValue(newValue);
     }
   }
+
   return [value, setStoredValue];
 }
+
 export default useLocalStorage;

@@ -1,6 +1,6 @@
 import type { WeatherDay } from "./weatherReducer";
 
-type RawWeatherDay = {
+export type RawWeatherDay = {
   datetime: string;
   temp: number;
   feelslike: number;
@@ -8,7 +8,7 @@ type RawWeatherDay = {
   icon: string;
   [key: string]: unknown;
 };
-type RawWeatherResponse = {
+export type RawWeatherResponse = {
   days: RawWeatherDay[];
 };
 function transformWeatherResponse(response: RawWeatherResponse): WeatherDay[] {

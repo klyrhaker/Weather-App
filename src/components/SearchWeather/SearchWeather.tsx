@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useDebounce from "../../hooks/useDebounce";
 
-type SearchWeatherProps = {
+export type SearchWeatherProps = {
   onCityChange: (city: string) => void;
 };
 

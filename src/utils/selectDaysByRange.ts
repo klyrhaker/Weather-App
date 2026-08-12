@@ -1,6 +1,6 @@
 import type { WeatherDay } from "./weatherReducer";
 
-type WeatherRange = "today" | "3days" | "10days";
+export type WeatherRange = "today" | "3days" | "10days";
 export function selectDaysByRange(
   days: WeatherDay[],
   range: WeatherRange,

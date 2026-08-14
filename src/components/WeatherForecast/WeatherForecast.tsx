@@ -4,6 +4,7 @@ import { selectDaysByRange } from "../../utils/selectDaysByRange";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import transformTemp from "../../utils/transformTemp";
+import WeatherIcon from "../WeatherIcon/WeatherIcon";
 
 type WeatherForecastProps = {
   loading: boolean;
@@ -36,7 +37,7 @@ function WeatherForecast({ loading, error, data }: WeatherForecastProps) {
               <p>{day.conditions}</p>
               <p>{`temp: ${formatTemp(day.temp)}`}</p>
               <p>{`feelslike: ${formatTemp(day.feelslike)}`}</p>
-              <p>{day.icon}</p>
+              <WeatherIcon code={day.icon} />
             </li>
           ))}
         </ul>

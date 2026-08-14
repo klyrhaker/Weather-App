@@ -51,6 +51,9 @@ describe("WeatherForecast", () => {
     const dayBlock = screen.getByTestId("day-2026-08-08");
     expect(within(dayBlock).getByText("2026-08-08")).toBeInTheDocument();
     expect(within(dayBlock).getByText("Clear")).toBeInTheDocument();
+    expect(
+      within(dayBlock).getByTestId("weather-icon-clear-day"),
+    ).toBeInTheDocument();
     expect(within(dayBlock).getByText("temp: 25°C")).toBeInTheDocument();
     expect(within(dayBlock).getByText("feelslike: 20°C")).toBeInTheDocument();
   });

@@ -3,15 +3,11 @@ import WeatherForecast from "./WeatherForecast";
 import userEvent from "@testing-library/user-event";
 
 describe("WeatherForecast", () => {
-  test("renders text 'Loading...' when loading: true", () => {
-    const props = {
-      loading: true,
-      error: null,
-      data: null,
-    };
+  test("renders 1 skeleton day block when loading with default range", () => {
+    const props = { loading: true, error: null, data: null };
     render(<WeatherForecast {...props} />);
-    const loading = screen.getByText(/loading\.\.\./i);
-    expect(loading).toBeInTheDocument();
+    const dayBlocks = screen.getAllByTestId(/^skeleton-day-/);
+    expect(dayBlocks).toHaveLength(1);
   });
   test("renders error text when error prop is provided", () => {
     const props = {

@@ -1,5 +1,11 @@
+import Skeleton from "./components/Skeleton/Skeleton";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Skeleton count={10} />
+    </>
+  );
 }
 
 export default App;

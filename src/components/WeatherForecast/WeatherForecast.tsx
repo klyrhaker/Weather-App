@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import transformTemp from "../../utils/transformTemp";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
+import Skeleton from "../Skeleton/Skeleton";
 
 type WeatherForecastProps = {
   loading: boolean;
@@ -12,15 +13,24 @@ type WeatherForecastProps = {
   data: WeatherDay[] | null;
 };
 
+const RANGE_TO_COUNT: Record<WeatherRange, number> = {
+  today: 1,
+  "3days": 3,
+  "10days": 10,
+};
+
 function WeatherForecast({ loading, error, data }: WeatherForecastProps) {
   const [days, setDays] = useState(data);
   const [unit, setUnit] = useState<"celsius" | "fahrenheit">("celsius");
   const [range, setRange] = useState<WeatherRange>("today");
+
   useEffect(() => {
     data && setDays(selectDaysByRange(data, range));
   }, [data, range]);
 
-  if (loading) return <p>loading...</p>;
+  const count = RANGE_TO_COUNT[range];
+
+  if (loading) return <Skeleton count={count} />;
   if (error) return <p role="alert">{error}</p>;
   if (!data) return <p>Search for a city to see the weather</p>;
   const formatTemp = (value: number) => {

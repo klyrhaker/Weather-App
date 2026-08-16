@@ -31,15 +31,18 @@ describe("WeatherForecast", () => {
   });
   test("renders weather-list when data isn't null", () => {
     const props = {
-      data: [
-        {
-          datetime: "2026-08-08",
-          temp: 25,
-          conditions: "Clear",
-          icon: "clear-day",
-          feelslike: 20,
-        },
-      ],
+      data: {
+        resolvedAddress: "london",
+        days: [
+          {
+            datetime: "2026-08-08",
+            temp: 25,
+            conditions: "Clear",
+            icon: "clear-day",
+            feelslike: 20,
+          },
+        ],
+      },
       loading: false,
       error: null,
     };
@@ -56,15 +59,18 @@ describe("WeatherForecast", () => {
   test("switches temperature unit from celsius to fahrenheit on button click", async () => {
     const user = userEvent.setup();
     const props = {
-      data: [
-        {
-          datetime: "2026-08-08",
-          temp: 25,
-          conditions: "Clear",
-          icon: "clear-day",
-          feelslike: 20,
-        },
-      ],
+      data: {
+        resolvedAddress: "london",
+        days: [
+          {
+            datetime: "2026-08-08",
+            temp: 25,
+            conditions: "Clear",
+            icon: "clear-day",
+            feelslike: 20,
+          },
+        ],
+      },
       loading: false,
       error: null,
     };
@@ -81,13 +87,16 @@ describe("WeatherForecast", () => {
     const props = {
       loading: false,
       error: null,
-      data: Array.from({ length: 10 }, (_, i) => ({
-        conditions: i === 1 ? "Rain" : "Clear",
-        datetime: `2026-08-${String(i + 1).padStart(2, "0")}`,
-        feelslike: 24,
-        icon: i === 1 ? "rain" : "clear-day",
-        temp: 25,
-      })),
+      data: {
+        resolvedAddress: "london",
+        days: Array.from({ length: 10 }, (_, i) => ({
+          conditions: i === 1 ? "Rain" : "Clear",
+          datetime: `2026-08-${String(i + 1).padStart(2, "0")}`,
+          feelslike: 24,
+          icon: i === 1 ? "rain" : "clear-day",
+          temp: 25,
+        })),
+      },
     };
     const user = userEvent.setup();
     render(<WeatherForecast {...props} />);
@@ -103,5 +112,27 @@ describe("WeatherForecast", () => {
     expect(getDayBlocks().length).toBe(10);
     await user.click(todayBtn);
     expect(getDayBlocks().length).toBe(1);
+  });
+  test("renders resolvedAddress only once regardless of the number of days", async () => {
+    const props = {
+      loading: false,
+      error: null,
+      data: {
+        resolvedAddress: "london",
+        days: Array.from({ length: 10 }, (_, i) => ({
+          conditions: i === 1 ? "Rain" : "Clear",
+          datetime: `2026-08-${String(i + 1).padStart(2, "0")}`,
+          feelslike: 24,
+          icon: i === 1 ? "rain" : "clear-day",
+          temp: 25,
+        })),
+      },
+    };
+    const user = userEvent.setup();
+    render(<WeatherForecast {...props} />);
+    const tenDaysBtn = screen.getByRole("button", { name: /10days/i });
+    await user.click(tenDaysBtn);
+    const resolvedAddress = screen.queryAllByText("london");
+    expect(resolvedAddress).toHaveLength(1);
   });
 });

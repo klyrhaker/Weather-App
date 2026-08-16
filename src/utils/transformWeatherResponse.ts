@@ -1,4 +1,4 @@
-import type { WeatherDay } from "./weatherReducer";
+import type { TransformedWeatherResponse } from "../types/weather";
 
 export type RawWeatherDay = {
   datetime: string;
@@ -9,17 +9,24 @@ export type RawWeatherDay = {
   [key: string]: unknown;
 };
 export type RawWeatherResponse = {
+  resolvedAddress: string;
   days: RawWeatherDay[];
 };
-function transformWeatherResponse(response: RawWeatherResponse): WeatherDay[] {
-  return response.days.map(
-    ({ datetime, feelslike, conditions, icon, temp }) => ({
-      datetime,
-      feelslike,
-      conditions,
-      icon,
-      temp,
-    }),
-  );
+
+function transformWeatherResponse(
+  response: RawWeatherResponse,
+): TransformedWeatherResponse {
+  return {
+    resolvedAddress: response.resolvedAddress,
+    days: response.days.map(
+      ({ datetime, feelslike, conditions, icon, temp }) => ({
+        datetime,
+        feelslike,
+        conditions,
+        icon,
+        temp,
+      }),
+    ),
+  };
 }
 export default transformWeatherResponse;

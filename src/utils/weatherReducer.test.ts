@@ -8,15 +8,18 @@ describe("weatherReducer", () => {
   test("FETCH_START sets loading true, clears error, keeps existing data", () => {
     const state: WeatherState = {
       loading: false,
-      data: [
-        {
-          conditions: "Clear",
-          datetime: "2026-08-08",
-          feelslike: 24,
-          icon: "clear-day",
-          temp: 25,
-        },
-      ],
+      data: {
+        resolvedAddress: "london",
+        days: [
+          {
+            conditions: "Clear",
+            datetime: "2026-08-08",
+            feelslike: 24,
+            icon: "clear-day",
+            temp: 25,
+          },
+        ],
+      },
       error: "error",
     };
     const action: WeatherAction = { type: "FETCH_START" };
@@ -28,15 +31,18 @@ describe("weatherReducer", () => {
   test("FETCH_ERROR sets error message, loading false, clears data", () => {
     const state: WeatherState = {
       loading: true,
-      data: [
-        {
-          conditions: "Clear",
-          datetime: "2026-08-08",
-          feelslike: 24,
-          icon: "clear-day",
-          temp: 25,
-        },
-      ],
+      data: {
+        resolvedAddress: "london",
+        days: [
+          {
+            conditions: "Clear",
+            datetime: "2026-08-08",
+            feelslike: 24,
+            icon: "clear-day",
+            temp: 25,
+          },
+        ],
+      },
       error: null,
     };
     const action: WeatherAction = { type: "FETCH_ERROR", payload: "error 404" };
@@ -48,15 +54,18 @@ describe("weatherReducer", () => {
   test("FETCH_SUCCESS sets data and stops loading", () => {
     const action: WeatherAction = {
       type: "FETCH_SUCCESS",
-      payload: [
-        {
-          conditions: "Clear",
-          datetime: "2026-08-08",
-          feelslike: 24,
-          icon: "clear-day",
-          temp: 25,
-        },
-      ],
+      payload: {
+        resolvedAddress: "london",
+        days: [
+          {
+            conditions: "Clear",
+            datetime: "2026-08-08",
+            feelslike: 24,
+            icon: "clear-day",
+            temp: 25,
+          },
+        ],
+      },
     };
     const state: WeatherState = {
       loading: true,

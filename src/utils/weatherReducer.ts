@@ -1,19 +1,14 @@
-export type WeatherDay = {
-  conditions: string;
-  datetime: string;
-  feelslike: number;
-  icon: string;
-  temp: number;
-};
+import type { TransformedWeatherResponse } from "../types/weather";
+
 export type WeatherState = {
   loading: boolean;
-  data: WeatherDay[] | null;
+  data: TransformedWeatherResponse | null;
   error: string | null;
 };
 
 export type WeatherAction =
   | { type: "FETCH_START" }
-  | { type: "FETCH_SUCCESS"; payload: WeatherDay[] }
+  | { type: "FETCH_SUCCESS"; payload: TransformedWeatherResponse }
   | { type: "FETCH_ERROR"; payload: string };
 
 export const initialState: WeatherState = {

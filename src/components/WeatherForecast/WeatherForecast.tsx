@@ -1,4 +1,3 @@
-import type { WeatherDay } from "../../utils/weatherReducer";
 import type { WeatherRange } from "../../utils/selectDaysByRange";
 import { selectDaysByRange } from "../../utils/selectDaysByRange";
 import { useEffect, useState } from "react";
@@ -6,11 +5,15 @@ import Button from "../Button/Button";
 import transformTemp from "../../utils/transformTemp";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
 import Skeleton from "../Skeleton/Skeleton";
+import {
+  type WeatherDay,
+  type TransformedWeatherResponse,
+} from "../../types/weather";
 
 type WeatherForecastProps = {
   loading: boolean;
   error: string | null;
-  data: WeatherDay[] | null;
+  data: TransformedWeatherResponse | null;
 };
 
 const RANGE_TO_COUNT: Record<WeatherRange, number> = {
@@ -20,12 +23,12 @@ const RANGE_TO_COUNT: Record<WeatherRange, number> = {
 };
 
 function WeatherForecast({ loading, error, data }: WeatherForecastProps) {
-  const [days, setDays] = useState(data);
+  const [days, setDays] = useState<WeatherDay[] | null>(data?.days ?? null);
   const [unit, setUnit] = useState<"celsius" | "fahrenheit">("celsius");
   const [range, setRange] = useState<WeatherRange>("today");
 
   useEffect(() => {
-    data && setDays(selectDaysByRange(data, range));
+    data && setDays(selectDaysByRange(data.days, range));
   }, [data, range]);
 
   const count = RANGE_TO_COUNT[range];
@@ -40,17 +43,20 @@ function WeatherForecast({ loading, error, data }: WeatherForecastProps) {
   return (
     <>
       {days && (
-        <ul>
-          {days.map((day) => (
-            <li key={day.datetime} data-testid={`day-${day.datetime}`}>
-              <p>{day.datetime}</p>
-              <p>{day.conditions}</p>
-              <p>{`temp: ${formatTemp(day.temp)}`}</p>
-              <p>{`feelslike: ${formatTemp(day.feelslike)}`}</p>
-              <WeatherIcon code={day.icon} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <p>{data.resolvedAddress}</p>
+          <ul>
+            {days.map((day) => (
+              <li key={day.datetime} data-testid={`day-${day.datetime}`}>
+                <p>{day.datetime}</p>
+                <p>{day.conditions}</p>
+                <p>{`temp: ${formatTemp(day.temp)}`}</p>
+                <p>{`feelslike: ${formatTemp(day.feelslike)}`}</p>
+                <WeatherIcon code={day.icon} />
+              </li>
+            ))}
+          </ul>
+        </>
       )}
       <Button
         onClick={() => setRange("today")}

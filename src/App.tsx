@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (!coords) return;
-    setCity(`${coords?.latitude} ${coords?.longitude}`);
+    setCity(`${coords?.latitude},${coords?.longitude}`);
   }, [coords]);
 
   return (

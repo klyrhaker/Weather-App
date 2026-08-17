@@ -57,4 +57,14 @@ describe("useTheme", () => {
     expect(currentTheme).toBe("light");
     expect(result.current[0]).toBe("light");
   });
+  test("applies data-theme attribute to document element", () => {
+    mockMatchMedia(false);
+    const { result } = renderHook(() => useTheme());
+    const domTheme = () => document.documentElement.getAttribute("data-theme");
+    expect(domTheme()).toBe("light");
+    act(() => {
+      result.current[1]();
+    });
+    expect(domTheme()).toBe("dark");
+  });
 });

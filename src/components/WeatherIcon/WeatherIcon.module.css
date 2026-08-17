@@ -1,24 +1,36 @@
 .sunny {
+  color: var(--weather-sunny);
 }
 .night {
+  color: var(--weather-night);
 }
 .cloudy {
+  color: var(--weather-cloudy);
 }
 .fog {
+  color: var(--weather-fog);
 }
 .hail {
+  color: var(--weather-hail);
 }
 .partlyCloudyDay {
+  color: var(--weather-partly-cloudy-day);
 }
 .partlyCloudyNight {
+  color: var(--weather-partly-cloudy-night);
 }
 .rainy {
+  color: var(--weather-rainy);
 }
 .sleet {
+  color: var(--weather-sleet);
 }
 .snowy {
+  color: var(--weather-snowy);
 }
 .thunder {
+  color: var(--weather-thunder);
 }
 .wind {
+  color: var(--weather-wind);
 }

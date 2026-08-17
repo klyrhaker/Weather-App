@@ -1,0 +1,66 @@
+:root[data-theme="light"] {
+  /* базовые цвета страницы */
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --surface-color: #f5f5f5;
+  --border-color: #e0e0e0;
+
+  --accent-color: #2f80ed;
+  --accent-color-hover: #1c6dd0;
+
+  /* скелетон-заглушка */
+  --skeleton-bg: #e0e0e0;
+  --skeleton-shimmer: #f0f0f0;
+
+  /* цвета иконок погоды */
+  --weather-sunny: #f5a623;
+  --weather-night: #4a4a68;
+  --weather-cloudy: #9b9b9b;
+  --weather-fog: #b0b0b0;
+  --weather-hail: #7fb3d5;
+  --weather-partly-cloudy-day: #f0c674;
+  --weather-partly-cloudy-night: #6c6c8a;
+  --weather-rainy: #4a90d9;
+  --weather-sleet: #85c1e9;
+  --weather-snowy: #bcd9f2;
+  --weather-thunder: #f39c12;
+  --weather-wind: #7f8c8d;
+}
+
+:root[data-theme="dark"] {
+  /* базовые цвета страницы */
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --surface-color: #2a2a2a;
+  --border-color: #3a3a3a;
+
+  /* акцент (кнопки, активные состояния) */
+  --accent-color: #5b9bf5;
+  --accent-color-hover: #3f7fe0;
+
+  /* скелетон-заглушка */
+  --skeleton-bg: #2a2a2a;
+  --skeleton-shimmer: #3a3a3a;
+
+  /* цвета иконок погоды */
+  --weather-sunny: #f7c04a;
+  --weather-night: #8a8ac2;
+  --weather-cloudy: #b5b5b5;
+  --weather-fog: #9a9a9a;
+  --weather-hail: #a3d0ea;
+  --weather-partly-cloudy-day: #f5d98a;
+  --weather-partly-cloudy-night: #9494c2;
+  --weather-rainy: #6ba8e8;
+  --weather-sleet: #a8d4f0;
+  --weather-snowy: #d6ebfa;
+  --weather-thunder: #f5b041;
+  --weather-wind: #a5b3b5;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}

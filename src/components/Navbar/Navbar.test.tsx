@@ -30,7 +30,7 @@ describe("Navbar", () => {
   });
   test("renders city search input", () => {
     render(<Navbar onCityChange={() => {}} onRequestLocation={() => {}} />);
-    const input = screen.getByRole("textbox", { name: /search city/i });
+    const input = screen.getByTestId("search-city");
     expect(input).toBeInTheDocument();
   });
   test("renders button 'my location'", () => {

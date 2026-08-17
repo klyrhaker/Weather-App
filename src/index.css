@@ -1,3 +1,23 @@
+:root {
+  /* шрифт */
+  --font-family:
+    system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* размеры текста */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+
+  /* шкала отступов */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
 :root[data-theme="light"] {
   /* базовые цвета страницы */
   --bg-color: #ffffff;
@@ -57,6 +77,14 @@
   --weather-wind: #a5b3b5;
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+#root {
+  position: relative;
+}
 body {
   background-color: var(--bg-color);
   color: var(--text-color);

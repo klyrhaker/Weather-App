@@ -1,0 +1,108 @@
+.header {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  order: 1;
+  flex-shrink: 0;
+}
+
+.search {
+  order: 3;
+  flex-basis: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  order: 2;
+}
+
+.themeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.themeBtn:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.locationBtn {
+  height: 36px;
+  padding: 0 var(--spacing-sm);
+  border-radius: 18px;
+  font-size: var(--font-size-sm);
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.locationBtn:hover {
+  background-color: var(--accent-color-hover);
+}
+
+/* Планшеты и выше */
+@media (min-width: 768px) {
+  .header {
+    flex-wrap: nowrap;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .logo {
+    font-size: var(--font-size-lg);
+  }
+
+  .search {
+    order: 2;
+    flex-basis: auto;
+    flex-grow: 1;
+    max-width: 320px;
+    margin: 0 var(--spacing-md);
+  }
+
+  .controls {
+    order: 3;
+  }
+}
+
+/* Десктоп */
+@media (min-width: 1024px) {
+  .header {
+    padding: var(--spacing-md) var(--spacing-xl);
+  }
+
+  .logo {
+    font-size: var(--font-size-xl);
+  }
+
+  .search {
+    max-width: 400px;
+  }
+}

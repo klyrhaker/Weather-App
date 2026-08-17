@@ -6,9 +6,7 @@ describe("SearchWeather", () => {
   test("renders input for searching a city", () => {
     render(<SearchWeather onCityChange={() => {}} />);
 
-    const input = screen.getByRole("textbox", {
-      name: /search city/i,
-    });
+    const input = screen.getByTestId("search-city");
 
     expect(input).toBeInTheDocument();
   });
@@ -16,9 +14,7 @@ describe("SearchWeather", () => {
   test("focuses input on mount", () => {
     render(<SearchWeather onCityChange={() => {}} />);
 
-    const input = screen.getByRole("textbox", {
-      name: /search city/i,
-    });
+    const input = screen.getByTestId("search-city");
 
     expect(input).toHaveFocus();
   });
@@ -29,9 +25,7 @@ describe("SearchWeather", () => {
 
     render(<SearchWeather onCityChange={onCityChange} />);
 
-    const input = screen.getByRole("textbox", {
-      name: /search city/i,
-    });
+    const input = screen.getByTestId("search-city");
 
     await user.type(input, "Moscow");
 

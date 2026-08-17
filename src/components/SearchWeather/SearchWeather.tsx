@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useDebounce from "../../hooks/useDebounce";
+import styles from "./SearchWeather.module.css";
 
 export type SearchWeatherProps = {
   onCityChange: (city: string) => void;
@@ -20,8 +21,10 @@ function SearchWeather({ onCityChange }: SearchWeatherProps) {
 
   return (
     <label htmlFor="search-input">
-      Search City
       <input
+        className={styles.search}
+        data-testid="search-city"
+        placeholder="Search City"
         ref={inputRef}
         id="search-input"
         value={inputValue}

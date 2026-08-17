@@ -6,6 +6,7 @@ import WeatherForecast from "./components/WeatherForecast/WeatherForecast";
 import useLocalStorage from "./hooks/useLocalStorage";
 import useGeolocation from "./hooks/useGeolocation";
 import Footer from "./components/Footer/Footer";
+import styles from "./App.module.css";
 
 function App() {
   const [city, setCity] = useLocalStorage("city", "");
@@ -22,12 +23,16 @@ function App() {
   }, [coords]);
 
   return (
-    <>
-      <Navbar onCityChange={setCity} onRequestLocation={requestLocation} />
-      {loadingLoc && <p>Определяем местоположение...</p>}
-      <WeatherForecast loading={loading} error={error} data={data} />
+    <div className={styles.app}>
+      <div className={styles.main}>
+        <Navbar onCityChange={setCity} onRequestLocation={requestLocation} />
+        {loadingLoc && (
+          <p className={styles.locatingMessage}>Определяем местоположение...</p>
+        )}
+        <WeatherForecast loading={loading} error={error} data={data} />
+      </div>
       <Footer city={city} />
-    </>
+    </div>
   );
 }
 

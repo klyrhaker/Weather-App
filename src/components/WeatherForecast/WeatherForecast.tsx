@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import transformTemp from "../../utils/transformTemp";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
 import Skeleton from "../Skeleton/Skeleton";
+import styles from "./WeatherForecast.module.css";
 import {
   type WeatherDay,
   type TransformedWeatherResponse,
@@ -41,51 +42,63 @@ function WeatherForecast({ loading, error, data }: WeatherForecastProps) {
     return `${transformTemp(value, "celsius")}°F`;
   };
   return (
-    <>
+    <div className={styles.forecast}>
+      <div className={styles.rangeControls}>
+        <Button
+          className={styles.rangeButton}
+          onClick={() => setRange("today")}
+          aria-pressed={range === "today"}
+        >
+          today
+        </Button>
+        <Button
+          className={styles.rangeButton}
+          onClick={() => setRange("3days")}
+          aria-pressed={range === "3days"}
+        >
+          3days
+        </Button>
+        <Button
+          className={styles.rangeButton}
+          onClick={() => setRange("10days")}
+          aria-pressed={range === "10days"}
+        >
+          10days
+        </Button>
+        <Button
+          className={styles.unitToggle}
+          onClick={() =>
+            setUnit((prev) => (prev === "celsius" ? "fahrenheit" : "celsius"))
+          }
+          data-testid="toggle-temp"
+          aria-pressed={unit === "fahrenheit"}
+        >
+          {unit}
+        </Button>
+      </div>
       {days && (
         <>
-          <p>{data.resolvedAddress}</p>
-          <ul>
+          <p className={styles.address}>{data.resolvedAddress}</p>
+          <ul className={styles.list}>
             {days.map((day) => (
-              <li key={day.datetime} data-testid={`day-${day.datetime}`}>
-                <p>{day.datetime}</p>
-                <p>{day.conditions}</p>
-                <p>{`temp: ${formatTemp(day.temp)}`}</p>
-                <p>{`feelslike: ${formatTemp(day.feelslike)}`}</p>
+              <li
+                className={styles.dayCard}
+                key={day.datetime}
+                data-testid={`day-${day.datetime}`}
+              >
+                <p className={styles.date}>{day.datetime}</p>
+                <p className={styles.conditions}>{day.conditions}</p>
+                <p className={styles.temp}>{`temp: ${formatTemp(day.temp)}`}</p>
+                <p
+                  className={styles.feelslike}
+                >{`feelslike: ${formatTemp(day.feelslike)}`}</p>
                 <WeatherIcon code={day.icon} />
               </li>
             ))}
           </ul>
         </>
       )}
-      <Button
-        onClick={() => setRange("today")}
-        aria-pressed={range === "today"}
-      >
-        today
-      </Button>
-      <Button
-        onClick={() => setRange("3days")}
-        aria-pressed={range === "3days"}
-      >
-        3days
-      </Button>
-      <Button
-        onClick={() => setRange("10days")}
-        aria-pressed={range === "10days"}
-      >
-        10days
-      </Button>
-      <Button
-        onClick={() =>
-          setUnit((prev) => (prev === "celsius" ? "fahrenheit" : "celsius"))
-        }
-        data-testid="toggle-temp"
-        aria-pressed={unit === "fahrenheit"}
-      >
-        {unit}
-      </Button>
-    </>
+    </div>
   );
 }
 export default WeatherForecast;

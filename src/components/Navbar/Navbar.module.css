@@ -68,7 +68,6 @@
   background-color: var(--accent-color-hover);
 }
 
-/* Планшеты и выше */
 @media (min-width: 768px) {
   .header {
     flex-wrap: nowrap;
@@ -92,7 +91,6 @@
   }
 }
 
-/* Десктоп */
 @media (min-width: 1024px) {
   .header {
     padding: var(--spacing-md) var(--spacing-xl);

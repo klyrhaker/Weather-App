@@ -51,7 +51,7 @@ describe("useGeolocation", () => {
     expect(result.current.loadingLoc).toBe(true);
   });
   test("sets error when requestLocation fails", async () => {
-    mockGetCurrentPosition.mockImplementation((onSuccess, onError) => {
+    mockGetCurrentPosition.mockImplementation((_onSuccess, onError) => {
       onError({
         code: 1,
         message: "User denied Geolocation",

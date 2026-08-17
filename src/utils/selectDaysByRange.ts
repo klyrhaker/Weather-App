@@ -1,6 +1,5 @@
 import type { WeatherDay } from "../types/weather";
 
-
 export type WeatherRange = "today" | "3days" | "10days";
 export function selectDaysByRange(
   days: WeatherDay[],
@@ -15,6 +14,7 @@ export function selectDaysByRange(
       return days;
     default:
       const exhaustiveCheck: never = range;
+      void exhaustiveCheck;
       return days;
   }
 }

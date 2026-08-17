@@ -30,6 +30,7 @@ export function weatherReducer(
       return { loading: false, error: null, data: action.payload };
     default:
       const exhaustiveCheck: never = action;
+      void exhaustiveCheck;
       return state;
   }
 }

@@ -1,5 +1,6 @@
+import type { WeatherDay } from "../types/weather";
 import { selectDaysByRange } from "./selectDaysByRange";
-import type { WeatherDay } from "./weatherReducer";
+
 const days: WeatherDay[] = [
   {
     conditions: "Clear",

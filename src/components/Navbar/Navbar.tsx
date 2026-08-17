@@ -4,9 +4,10 @@ import { Sun, Moon } from "lucide-react";
 import SearchWeather from "../SearchWeather/SearchWeather";
 
 type NavbarProps = {
+  onRequestLocation: () => void;
   onCityChange: (city: string) => void;
 };
-function Navbar({ onCityChange }: NavbarProps) {
+function Navbar({ onCityChange, onRequestLocation }: NavbarProps) {
   const [theme, toggleTheme] = useTheme();
 
   return (
@@ -17,6 +18,7 @@ function Navbar({ onCityChange }: NavbarProps) {
         <Button aria-label="toggle theme" onClick={toggleTheme}>
           {theme === "light" ? <Moon /> : <Sun />}
         </Button>
+        <Button onClick={onRequestLocation}>My Location</Button>
       </header>
     </>
   );

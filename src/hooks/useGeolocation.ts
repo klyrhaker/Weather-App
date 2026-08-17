@@ -1,7 +1,7 @@
 import { useState } from "react";
 type StateLocation = {
-  loading: boolean;
-  error: string | null;
+  loadingLoc: boolean;
+  errorLoc: string | null;
   coords: { latitude: number; longitude: number } | null;
 };
 type ReturnedLocation = StateLocation & {
@@ -9,18 +9,18 @@ type ReturnedLocation = StateLocation & {
 };
 function useGeolocation(): ReturnedLocation {
   const [location, setLocation] = useState<StateLocation>({
-    loading: false,
-    error: null,
+    loadingLoc: false,
+    errorLoc: null,
     coords: null,
   });
   function requestLocation() {
-    setLocation((prev) => ({ ...prev, loading: true, error: null }));
+    setLocation((prev) => ({ ...prev, loadingLoc: true, errorLoc: null }));
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLocation({
-          loading: false,
-          error: null,
+          loadingLoc: false,
+          errorLoc: null,
           coords: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -29,8 +29,8 @@ function useGeolocation(): ReturnedLocation {
       },
       (error) => {
         setLocation({
-          loading: false,
-          error: error.message,
+          loadingLoc: false,
+          errorLoc: error.message,
           coords: null,
         });
       },

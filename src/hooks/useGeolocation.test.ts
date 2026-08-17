@@ -44,11 +44,11 @@ describe("useGeolocation", () => {
 
     const { result } = renderHook(() => useGeolocation());
 
-    expect(result.current.loading).toBe(false);
+    expect(result.current.loadingLoc).toBe(false);
     act(() => {
       result.current.requestLocation();
     });
-    expect(result.current.loading).toBe(true);
+    expect(result.current.loadingLoc).toBe(true);
   });
   test("sets error when requestLocation fails", async () => {
     mockGetCurrentPosition.mockImplementation((onSuccess, onError) => {
@@ -63,7 +63,7 @@ describe("useGeolocation", () => {
       result.current.requestLocation();
     });
     await waitFor(() => {
-      expect(result.current.error).toBe("User denied Geolocation");
+      expect(result.current.errorLoc).toBe("User denied Geolocation");
     });
   });
 });
